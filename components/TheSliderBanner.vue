@@ -9,7 +9,7 @@
         </svg>
       </a>
       <div class="col-span-10">
-        <div v-for="slide in slides" :key="slide.id">
+        <div v-for="slide in getBannerSlides" :key="slide.id">
           <div v-if="activeSlide === slide.id" class="slide grid grid-cols-12 place-items-center">
             <div class="col-span-7">
                 <h1 class="text-5xl font-bold leading-tight">{{ slide.title }}</h1>
@@ -63,66 +63,29 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'SliderBanner',
   data: () => ({
     activeSlide: 1,
-    slides: [
-      {
-        id: 1,
-        title: "Ngulik Bisnis V.35: Membuat Proyeksi Keuangan yang Menarik!",
-        paragraph: "Jangan lewatkan kesempatan mempelajari cara membuat proyeksi keuangan yang tepat dan menarik minat investor bersama Akademi KiriminAja",
-        lists: [
-          {id: 1, text: "Cara membuat proyeksi keuangan yang tepat"},
-          {id: 2, text: "Strategi menentukan target keuangan yang realistis"},
-          {id: 3, text: "Menawarkan ke investor dengan cara yang efektif"}
-        ],
-        image: "slide-1"
-      },
-      {
-        id: 2,
-        title: "Kejutan Valentine, Yuk Bikin Pelangganmu Makin Setia",
-        paragraph: "Yuk brand yang sayang ke konsumen, warnai bulan Februari ini dengan memberikan kejutan valentine diskon ongkir bersama KiriminAja.",
-        lists: [
-          {id: 1, text: "Diskon pengiriman Rp 10.000"},
-          {id: 2, text: "Cepat dan mudah"},
-          {id: 3, text: "Hemat, aman, dan nyaman"}
-        ],
-        image: "slide-2"
-      },
-      {
-        id: 3,
-        title: "Bikin Website Instan yang Bisa Kirim Paket COD",
-        paragraph: "Kolaborasi KiriminAja X Niagahoster membantu Anda berjualan online melalui website tanpa ribet memikirkan hal teknis, cukup upload produk saja.",
-        lists: [
-          {id: 1, text: "Terhindar dari potongan fee marketplace"},
-          {id: 2, text: "Hemat menentukan biaya ongkir"},
-          {id: 3, text: "Lebih maju dan reliable"}
-        ],
-        image: "slide-3"
-      },
-      {
-        id: 4,
-        title: "Khawatir Hadapi Resesi? Udah Tenang, KiriminAja!",
-        paragraph: "KiriminAja berkomitmen empowering pelaku bisnis untuk berani melangkah dengan memberikan kepastian dan keandalan logistik.",
-        lists: [
-          {id: 1, text: "COD Funding dengan Belasan Pilihan Ekspedisi"},
-          {id: 2, text: "Tersedia Layanan Dashboard dan Mobile Apps"},
-          {id: 3, text: "Akademi KiriminAja untuk Bimbingan Bisnis"}
-        ],
-        image: "slide-4"
-      }
-    ]
   }),
+  computed: {
+    ...mapGetters(['getBannerSlides']),
+  },
   mounted() {
+    this.getBanners();
     // auto slide
     setInterval(() => {
       this.nextSlide();
     }, 10000);
   },
   methods: {
+    ...mapActions([
+      'getBanners',
+    ]),
     nextSlide() {
-      if (this.activeSlide !== this.slides.length) {
+      if (this.activeSlide !== this.getBannerSlides.length) {
         this.activeSlide++;
       } else {
         this.activeSlide = 1;
@@ -130,7 +93,7 @@ export default {
     },
     prevSlide() {
       if (this.activeSlide === 1) {
-        this.activeSlide = this.activeSlide + (this.slides.length - this.activeSlide);
+        this.activeSlide = this.activeSlide + (this.getBannerSlides.length - this.activeSlide);
       } else {
         this.activeSlide--; 
       }
