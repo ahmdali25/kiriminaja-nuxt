@@ -1,9 +1,11 @@
 <template>
-    <ssr-carousel class="my-10" :slides-per-page='6' :autoplay-delay="4" loop>
-        <div v-for="slide in slides" :key="slide.id">
-            <div class="slide"><img :src="slide.image" :alt="`Kurir ${slide.title}`"/></div>
-        </div>
-    </ssr-carousel>
+    <section class="my-10">
+      <ssr-carousel :slides-per-page='6' :autoplay-delay="4" loop>
+          <div v-for="slide in slides" :key="slide.id">
+              <div class="slide"><img :src="slide.image" :alt="`Kurir ${slide.title}`"/></div>
+          </div>
+      </ssr-carousel>
+    </section>
 </template>
 
 <script>

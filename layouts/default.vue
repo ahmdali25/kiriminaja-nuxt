@@ -1,9 +1,7 @@
 <template>
   <main>
     <BaseHeader />
-    <section  class="py-3 xl:py-14">
-      <Nuxt />
-    </section>
+    <Nuxt class="py-3 xl:py-14" />
     <BaseFooter />
   </main>
 </template>
