@@ -27,10 +27,7 @@
                 </ul>
                 <div class="flex gap-3 mt-10">
                   <div>
-                    <a href="#" class="flex gap-2 text-white py-3 pl-5 pr-5 rounded-full bg-primary-700">
-                      <span>Daftar Gratis</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="5" y1="12" x2="19" y2="12"></line><line x1="13" y1="18" x2="19" y2="12"></line><line x1="13" y1="6" x2="19" y2="12"></line></svg>
-                    </a>
+                    <BaseButtonRegister />
                   </div>
                   <div class="flex gap-2 items-center cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -64,41 +61,45 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import BaseButtonRegister from './BaseButtonRegister.vue';
 
 export default {
-  name: 'SliderBanner',
-  data: () => ({
-    activeSlide: 1,
-  }),
-  computed: {
-    ...mapGetters(['getBannerSlides']),
-  },
-  mounted() {
-    this.getBanners();
-    // auto slide
-    setInterval(() => {
-      this.nextSlide();
-    }, 10000);
-  },
-  methods: {
-    ...mapActions([
-      'getBanners',
-    ]),
-    nextSlide() {
-      if (this.activeSlide !== this.getBannerSlides.length) {
-        this.activeSlide++;
-      } else {
-        this.activeSlide = 1;
-      }
+    name: "SliderBanner",
+    components: { BaseButtonRegister },
+    data: () => ({
+        activeSlide: 1,
+    }),
+    computed: {
+        ...mapGetters(["getBannerSlides"]),
     },
-    prevSlide() {
-      if (this.activeSlide === 1) {
-        this.activeSlide = this.activeSlide + (this.getBannerSlides.length - this.activeSlide);
-      } else {
-        this.activeSlide--; 
-      }
-    }
-  }
+    mounted() {
+        this.getBanners();
+        // auto slide
+        setInterval(() => {
+            this.nextSlide();
+        }, 10000);
+    },
+    methods: {
+        ...mapActions([
+            "getBanners",
+        ]),
+        nextSlide() {
+            if (this.activeSlide !== this.getBannerSlides.length) {
+                this.activeSlide++;
+            }
+            else {
+                this.activeSlide = 1;
+            }
+        },
+        prevSlide() {
+            if (this.activeSlide === 1) {
+                this.activeSlide = this.activeSlide + (this.getBannerSlides.length - this.activeSlide);
+            }
+            else {
+                this.activeSlide--;
+            }
+        }
+    },
 }
 </script>
 

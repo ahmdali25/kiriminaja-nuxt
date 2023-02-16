@@ -121,3 +121,9 @@
         </div>
     </Footer>
 </template>
+
+<script>
+export default {
+  name: 'BaseFooter',
+}
+</script>
